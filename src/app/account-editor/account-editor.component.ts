@@ -8,10 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountEditorComponent implements OnInit {
 
-  user: any;
+  user: { id: number, name: string, phones: { type: string, number: string }[] };
   departments: { id: number, name: string }[];
-
-  _temp = { phone: {} };
+  _temp: { phone: { type: string, number: string } };
 
   constructor() {
     this.user = {
@@ -28,14 +27,19 @@ export class AccountEditorComponent implements OnInit {
       { id: 2, name: 'Accounting' },
       { id: 3, name: 'Terrorism' },
     ];
+
+    this.clearTempPhone();
+  }
+
+  clearTempPhone() {
+    this._temp = { phone: { type: '', number: '' } };
   }
 
   addPhone() {
     this.user.phones.push(this._temp.phone);
-    this._temp.phone = {};
+    this.clearTempPhone();
   }
 
   ngOnInit() {
   }
-
 }

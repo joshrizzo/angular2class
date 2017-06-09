@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var AccountEditorComponent = (function () {
     function AccountEditorComponent() {
-        this._temp = { phone: {} };
         this.user = {
             id: 1,
             name: 'something',
@@ -25,10 +24,14 @@ var AccountEditorComponent = (function () {
             { id: 2, name: 'Accounting' },
             { id: 3, name: 'Terrorism' },
         ];
+        this.clearTempPhone();
     }
+    AccountEditorComponent.prototype.clearTempPhone = function () {
+        this._temp = { phone: { type: '', number: '' } };
+    };
     AccountEditorComponent.prototype.addPhone = function () {
         this.user.phones.push(this._temp.phone);
-        this._temp.phone = {};
+        this.clearTempPhone();
     };
     AccountEditorComponent.prototype.ngOnInit = function () {
     };
