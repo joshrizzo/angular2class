@@ -1,0 +1,11 @@
+{
+    "version": "0.1.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Server",
+            "program": "${workspaceRoot}/node_modules/lite-server/bin/lite-server"
+        }
+    ]
+}
