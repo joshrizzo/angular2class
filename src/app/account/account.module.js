@@ -5,31 +5,34 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var account_list_component_1 = require("./account-list/account-list.component");
 var router_1 = require("@angular/router");
-var account_module_1 = require("./account/account.module");
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
-var app_component_1 = require("./app.component");
 var forms_1 = require("@angular/forms");
-var defaultRoute = 'Accounts';
-var AppModule = (function () {
-    function AppModule() {
+var account_editor_component_1 = require("./account-editor/account-editor.component");
+var routes = [
+    { path: 'accounts', component: account_list_component_1.AccountListComponent },
+    { path: 'accounts/new', component: account_editor_component_1.AccountEditorComponent },
+    { path: 'accounts/:id', component: account_editor_component_1.AccountEditorComponent }
+];
+var AccountModule = (function () {
+    function AccountModule() {
     }
-    return AppModule;
+    return AccountModule;
 }());
-AppModule = __decorate([
+AccountModule = __decorate([
     core_1.NgModule({
         imports: [
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
-            account_module_1.AccountModule,
-            router_1.RouterModule.forRoot([
-                { path: '', redirectTo: defaultRoute, pathMatch: 'full' }
-            ])
+            router_1.RouterModule.forChild(routes)
         ],
-        declarations: [app_component_1.AppComponent],
-        bootstrap: [app_component_1.AppComponent]
+        declarations: [
+            account_editor_component_1.AccountEditorComponent,
+            account_list_component_1.AccountListComponent
+        ],
     })
-], AppModule);
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+], AccountModule);
+exports.AccountModule = AccountModule;
+//# sourceMappingURL=account.module.js.map
