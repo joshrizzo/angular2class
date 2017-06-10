@@ -28,13 +28,11 @@ export class UserRepository {
 
     save(user: User): Observable<User> {
         if (user.id) {
-            console.log('Saving User ID: ' + user.id);
             return this.http
                 .put(`${this.url}/${user.id}`, user)
                 .map(response => this.extractData(response))
                 .catch(error => this.handleError(error));
         }
-        console.log('Creating new user.');
         return this.http
             .post(this.url, user)
             .map(response => this.extractData(response))
@@ -42,7 +40,6 @@ export class UserRepository {
     }
 
     delete(id: number): Observable<any> {
-        console.log('Deleting User ID: ' + id);
         return this.http
             .delete(`${this.url}/${id}`)
             .catch(error => this.handleError(error));

@@ -8,11 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var user_1 = require("../../domain/model/user");
+var phone_1 = require("../../domain/model/phone");
 var core_1 = require("@angular/core");
 var PhoneEditorComponent = (function () {
     function PhoneEditorComponent() {
-        this.newPhone = new user_1.Phone();
+        this.newPhone = new phone_1.Phone();
         this.phonesChange = new core_1.EventEmitter();
     }
     Object.defineProperty(PhoneEditorComponent.prototype, "phones", {
@@ -29,7 +29,7 @@ var PhoneEditorComponent = (function () {
     PhoneEditorComponent.prototype.addPhone = function () {
         this.phones = this.phones || [];
         this.phones.push(this.newPhone);
-        this.newPhone = new user_1.Phone();
+        this.newPhone = new phone_1.Phone();
     };
     PhoneEditorComponent.prototype.deletePhone = function (phone) {
         this.phones.splice(this.phones.indexOf(phone), 1);

@@ -28,11 +28,6 @@ export class AccountListComponent implements OnInit {
   delete(id: number) {
     this.userRepository
       .delete(id)
-      .subscribe(result => this.handleResult(result));
-  }
-
-  handleResult(result: any) {
-    console.log('Result: ' + result);
-    this.loadUsers();
+      .subscribe(result => this.loadUsers());
   }
 }

@@ -1,6 +1,6 @@
 import { PhoneEditorComponent } from './../phone-editor/phone-editor.component';
 import { UserRepository } from './../../domain/api/user-repository.service';
-import { User, Phone } from './../../domain/model/user';
+import { User } from './../../domain/model/user';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/first';
@@ -46,7 +46,6 @@ export class AccountEditorComponent implements OnInit {
   }
 
   handleResult(result: any) {
-    console.log('Result: ' + result);
     this.router.navigateByUrl('accounts');
   }
 

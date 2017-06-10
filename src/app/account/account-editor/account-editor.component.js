@@ -43,7 +43,6 @@ var AccountEditorComponent = (function () {
         this.router.navigateByUrl('accounts');
     };
     AccountEditorComponent.prototype.handleResult = function (result) {
-        console.log('Result: ' + result);
         this.router.navigateByUrl('accounts');
     };
     AccountEditorComponent.prototype.ngOnInit = function () {

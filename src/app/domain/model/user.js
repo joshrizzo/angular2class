@@ -6,10 +6,4 @@ var User = (function () {
     return User;
 }());
 exports.User = User;
-var Phone = (function () {
-    function Phone() {
-    }
-    return Phone;
-}());
-exports.Phone = Phone;
 //# sourceMappingURL=user.js.map

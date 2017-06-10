@@ -4,4 +4,5 @@ function __export(m) {
 }
 __export(require("./api/user-repository.service"));
 __export(require("./model/user"));
+__export(require("./model/phone"));
 //# sourceMappingURL=index.js.map

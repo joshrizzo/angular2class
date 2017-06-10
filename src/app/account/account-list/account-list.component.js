@@ -29,11 +29,7 @@ var AccountListComponent = (function () {
         var _this = this;
         this.userRepository
             .delete(id)
-            .subscribe(function (result) { return _this.handleResult(result); });
-    };
-    AccountListComponent.prototype.handleResult = function (result) {
-        console.log('Result: ' + result);
-        this.loadUsers();
+            .subscribe(function (result) { return _this.loadUsers(); });
     };
     return AccountListComponent;
 }());

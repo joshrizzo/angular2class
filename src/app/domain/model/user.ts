@@ -1,3 +1,5 @@
+import { Phone } from './phone';
+
 export class User {
     id: number;
     name: string;
@@ -9,9 +11,4 @@ export class User {
     constructor() {
         this.phones = [];
     }
-}
-
-export class Phone {
-    number: string;
-    type: string;
 }

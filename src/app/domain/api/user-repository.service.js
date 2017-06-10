@@ -35,13 +35,11 @@ var UserRepository = (function () {
     UserRepository.prototype.save = function (user) {
         var _this = this;
         if (user.id) {
-            console.log('Saving User ID: ' + user.id);
             return this.http
                 .put(this.url + "/" + user.id, user)
                 .map(function (response) { return _this.extractData(response); })
                 .catch(function (error) { return _this.handleError(error); });
         }
-        console.log('Creating new user.');
         return this.http
             .post(this.url, user)
             .map(function (response) { return _this.extractData(response); })
@@ -49,7 +47,6 @@ var UserRepository = (function () {
     };
     UserRepository.prototype.delete = function (id) {
         var _this = this;
-        console.log('Deleting User ID: ' + id);
         return this.http
             .delete(this.url + "/" + id)
             .catch(function (error) { return _this.handleError(error); });

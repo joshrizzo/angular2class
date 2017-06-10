@@ -1,4 +1,4 @@
-import { Phone } from '../../domain/model/user';
+import { Phone } from '../../domain/model/phone';
 import { Component, Output, Input, EventEmitter } from '@angular/core';
 
 @Component({
