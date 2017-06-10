@@ -1,0 +1,36 @@
+<ul class="list-group">
+    <li class="list-group-item list-group-item-info">
+        Phone numbers
+    </li>
+    <li class="list-group-item" *ngFor="let phone of phones">
+        <button class="btn btn-danger" (click)="deletePhone(phone)">
+            X
+        </button> {{ phone.number | phone }}
+        <span class="badge">
+          {{ phone.type }}
+        </span>
+    </li>
+    <li class="list-group-item">
+        <div class="input-group">
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    {{newPhone.type}}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li *ngFor="let type of ['home', 'work', 'fax', 'other']">
+                        <a href="javascript:void(0);" (click)="newPhone.type = type">
+                          {{type}}
+                      </a>
+                    </li>
+                </ul>
+            </div>
+            <input type="text " class="form-control " placeholder="Add Phone... " [(ngModel)]="newPhone.number" />
+            <span class="input-group-btn ">
+              <button class="btn btn-info " (click)="addPhone()" [disabled]="!newPhone.number || !newPhone.type">
+                  Add
+              </button>
+            </span>
+        </div>
+    </li>
+</ul>

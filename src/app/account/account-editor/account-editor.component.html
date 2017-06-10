@@ -43,40 +43,9 @@
                     </div>
                 </div>
             </div>
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-info">
-                    Phone numbers
-                </li>
-                <li class="list-group-item" *ngFor="let phone of user.phones">
-                    {{ phone.number }}
-                    <span class="badge">
-                        {{ phone.type }}
-                    </span>
-                </li>
-                <li class="list-group-item">
-                    <div class="input-group">
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            {{_temp.phone.type}}
-                        <span class="caret"></span>
-                     </button>
-                            <ul class="dropdown-menu">
-                                <li *ngFor="let type of ['home', 'work', 'fax', 'other']">
-                                    <a href="javascript:void(0);" (click)="_temp.phone.type = type">
-                                        {{type}}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <input type="text " class="form-control " placeholder="Add Phone... " [(ngModel)]="_temp.phone.number" />
-                        <span class="input-group-btn ">
-                    <button class="btn btn-info " (click)="addPhone()">
-                        Add
-                    </button>
-                  </span>
-                    </div>
-                </li>
-            </ul>
+            <phone-editor #phoneEditor [(phones)]="user.phones">
+            </phone-editor>
+            <button (click)="clearPhones()">Clear Phones</button>
         </div>
         <div class="col-md-4 ">
             <pre>{{ user | json }}</pre>

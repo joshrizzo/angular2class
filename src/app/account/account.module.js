@@ -5,6 +5,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var phone_editor_component_1 = require("./phone-editor/phone-editor.component");
+var domain_module_1 = require("./../domain/domain.module");
+var shared_module_1 = require("./../shared/shared.module");
 var account_list_component_1 = require("./account-list/account-list.component");
 var router_1 = require("@angular/router");
 var core_1 = require("@angular/core");
@@ -26,11 +29,14 @@ AccountModule = __decorate([
         imports: [
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
-            router_1.RouterModule.forChild(routes)
+            router_1.RouterModule.forChild(routes),
+            shared_module_1.SharedModule,
+            domain_module_1.DomainModule
         ],
         declarations: [
             account_editor_component_1.AccountEditorComponent,
-            account_list_component_1.AccountListComponent
+            account_list_component_1.AccountListComponent,
+            phone_editor_component_1.PhoneEditorComponent
         ],
     })
 ], AccountModule);

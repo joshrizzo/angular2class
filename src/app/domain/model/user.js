@@ -1,6 +1,7 @@
 "use strict";
 var User = (function () {
     function User() {
+        this.phones = [];
     }
     return User;
 }());

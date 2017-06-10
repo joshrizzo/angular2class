@@ -1,3 +1,4 @@
+import { SharedModule } from './shared/shared.module';
 import { DomainModule } from './domain/domain.module';
 import { RouterModule } from '@angular/router';
 import { AccountModule } from './account/account.module';
@@ -15,8 +16,7 @@ const defaultRoute = 'accounts';
     RouterModule.forRoot([
       { path: '', redirectTo: defaultRoute, pathMatch: 'full' }
     ]),
-    AccountModule,
-    DomainModule
+    AccountModule
   ],
   declarations: [
     AppComponent

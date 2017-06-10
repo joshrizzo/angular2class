@@ -1,3 +1,6 @@
+import { PhoneEditorComponent } from './phone-editor/phone-editor.component';
+import { DomainModule } from './../domain/domain.module';
+import { SharedModule } from './../shared/shared.module';
 import { AccountListComponent } from './account-list/account-list.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -15,11 +18,14 @@ const routes: any = [
     imports: [
         BrowserModule,
         FormsModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        SharedModule,
+        DomainModule
     ],
     declarations: [
         AccountEditorComponent,
-        AccountListComponent
+        AccountListComponent,
+        PhoneEditorComponent
     ],
 })
 export class AccountModule { }

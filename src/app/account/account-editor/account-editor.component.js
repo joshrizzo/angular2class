@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var phone_editor_component_1 = require("./../phone-editor/phone-editor.component");
 var user_repository_service_1 = require("./../../domain/api/user-repository.service");
 var user_1 = require("./../../domain/model/user");
 var core_1 = require("@angular/core");
@@ -23,14 +24,9 @@ var AccountEditorComponent = (function () {
             { id: 2, name: 'Accounting' },
             { id: 3, name: 'Terrorism' },
         ];
-        this._temp = { phone: new user_1.Phone() };
         this.testUser = new user_1.User();
         this.user = this.testUser;
     }
-    AccountEditorComponent.prototype.addPhone = function () {
-        this.user.phones.push(this._temp.phone);
-        this._temp.phone = new user_1.Phone();
-    };
     AccountEditorComponent.prototype.save = function () {
         var _this = this;
         this.userRepository
@@ -68,8 +64,15 @@ var AccountEditorComponent = (function () {
     AccountEditorComponent.prototype.loadUser = function (user) {
         this.user = user;
     };
+    AccountEditorComponent.prototype.clearPhones = function () {
+        this.phoneEditor.clearList();
+    };
     return AccountEditorComponent;
 }());
+__decorate([
+    core_1.ViewChild('phoneEditor'),
+    __metadata("design:type", phone_editor_component_1.PhoneEditorComponent)
+], AccountEditorComponent.prototype, "phoneEditor", void 0);
 AccountEditorComponent = __decorate([
     core_1.Component({
         moduleId: module.id,

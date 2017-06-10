@@ -5,6 +5,10 @@ export class User {
     phones: Phone[];
     department: string;
     isEmployee: boolean;
+
+    constructor() {
+        this.phones = [];
+    }
 }
 
 export class Phone {

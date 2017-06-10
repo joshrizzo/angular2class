@@ -1,6 +1,7 @@
+import { PhoneEditorComponent } from './../phone-editor/phone-editor.component';
 import { UserRepository } from './../../domain/api/user-repository.service';
 import { User, Phone } from './../../domain/model/user';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/first';
 
@@ -16,19 +17,16 @@ export class AccountEditorComponent implements OnInit {
     { id: 2, name: 'Accounting' },
     { id: 3, name: 'Terrorism' },
   ];
-  _temp: { phone: Phone } = { phone: new Phone() };
   testUser: User = new User();
   user: User = this.testUser;
+
+  @ViewChild('phoneEditor')
+  phoneEditor: PhoneEditorComponent;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private userRepository: UserRepository) {
-  }
-
-  addPhone() {
-    this.user.phones.push(this._temp.phone);
-    this._temp.phone = new Phone();
   }
 
   save() {
@@ -68,5 +66,9 @@ export class AccountEditorComponent implements OnInit {
 
   loadUser(user: User) {
     this.user = user;
+  }
+
+  clearPhones() {
+    this.phoneEditor.clearList();
   }
 }
