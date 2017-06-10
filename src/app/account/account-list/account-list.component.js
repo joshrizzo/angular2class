@@ -8,10 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var user_repository_service_1 = require("./../../domain/api/user-repository.service");
 var core_1 = require("@angular/core");
 var AccountListComponent = (function () {
-    function AccountListComponent() {
+    function AccountListComponent(UserRepository) {
+        this.UserRepository = UserRepository;
     }
+    AccountListComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.UserRepository
+            .search()
+            .subscribe(function (x) { return _this.loadUsers(x); });
+    };
+    AccountListComponent.prototype.loadUsers = function (users) {
+        this.accounts = users;
+    };
     return AccountListComponent;
 }());
 AccountListComponent = __decorate([
@@ -20,7 +31,7 @@ AccountListComponent = __decorate([
         templateUrl: 'account-list.component.html',
         styleUrls: ['account-list.component.css']
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [user_repository_service_1.UserRepository])
 ], AccountListComponent);
 exports.AccountListComponent = AccountListComponent;
 //# sourceMappingURL=account-list.component.js.map

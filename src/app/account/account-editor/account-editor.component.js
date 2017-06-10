@@ -8,34 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var user_repository_service_1 = require("./../../domain/api/user-repository.service");
+var domain_1 = require("./../../domain/model/domain");
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var AccountEditorComponent = (function () {
-    function AccountEditorComponent(route, router) {
+    function AccountEditorComponent(route, router, userRepository) {
         this.route = route;
         this.router = router;
-        this.testUser = {
-            id: 1,
-            name: 'something',
-            phones: [
-                { type: 'mobile', number: '555-555-5555' },
-                { type: 'home', number: '555-555-5556' },
-            ]
-        };
-        this.user = this.testUser;
+        this.userRepository = userRepository;
         this.departments = [
             { id: 1, name: 'Marketing' },
             { id: 2, name: 'Accounting' },
             { id: 3, name: 'Terrorism' },
         ];
-        this.clearTempPhone();
+        this._temp = { phone: new domain_1.Phone() };
+        this.testUser = new domain_1.User();
+        this.user = this.testUser;
     }
-    AccountEditorComponent.prototype.clearTempPhone = function () {
-        this._temp = { phone: { type: '', number: '' } };
-    };
     AccountEditorComponent.prototype.addPhone = function () {
         this.user.phones.push(this._temp.phone);
-        this.clearTempPhone();
+        this._temp.phone = new domain_1.Phone();
     };
     AccountEditorComponent.prototype.save = function () {
         // TODO: Save.
@@ -46,23 +39,30 @@ var AccountEditorComponent = (function () {
         this.route.params.subscribe(function (x) { return _this.loadRoute(x); });
     };
     AccountEditorComponent.prototype.loadRoute = function (params) {
+        var _this = this;
         if (params.id) {
-            // TODO: Load from repo.
-            this.user = this.testUser;
+            this.userRepository
+                .getById(+params.id)
+                .subscribe(function (user) { return _this.loadUser(user); });
         }
         else {
-            this.user = { id: null, name: null, phones: [] };
+            this.user = new domain_1.User();
         }
+    };
+    AccountEditorComponent.prototype.loadUser = function (user) {
+        this.user = user;
     };
     return AccountEditorComponent;
 }());
 AccountEditorComponent = __decorate([
     core_1.Component({
+        moduleId: module.id,
         templateUrl: 'account-editor.component.html',
-        styleUrls: ['account-editor.component.css'],
-        moduleId: module.id
+        styleUrls: ['account-editor.component.css']
     }),
-    __metadata("design:paramtypes", [router_1.ActivatedRoute, router_1.Router])
+    __metadata("design:paramtypes", [router_1.ActivatedRoute,
+        router_1.Router,
+        user_repository_service_1.UserRepository])
 ], AccountEditorComponent);
 exports.AccountEditorComponent = AccountEditorComponent;
 //# sourceMappingURL=account-editor.component.js.map

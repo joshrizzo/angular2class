@@ -5,13 +5,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var domain_module_1 = require("./domain/domain.module");
 var router_1 = require("@angular/router");
 var account_module_1 = require("./account/account.module");
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("./app.component");
 var forms_1 = require("@angular/forms");
-var defaultRoute = 'Accounts';
+var defaultRoute = 'accounts';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -22,13 +23,18 @@ AppModule = __decorate([
         imports: [
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
-            account_module_1.AccountModule,
             router_1.RouterModule.forRoot([
                 { path: '', redirectTo: defaultRoute, pathMatch: 'full' }
-            ])
+            ]),
+            account_module_1.AccountModule,
+            domain_module_1.DomainModule
         ],
-        declarations: [app_component_1.AppComponent],
-        bootstrap: [app_component_1.AppComponent]
+        declarations: [
+            app_component_1.AppComponent
+        ],
+        bootstrap: [
+            app_component_1.AppComponent
+        ]
     })
 ], AppModule);
 exports.AppModule = AppModule;

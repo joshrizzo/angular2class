@@ -1,44 +1,33 @@
+import { UserRepository } from './../../domain/api/user-repository.service';
+import { User, Phone } from './../../domain/model/domain';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
+  moduleId: module.id,
   templateUrl: 'account-editor.component.html',
-  styleUrls: ['account-editor.component.css'],
-  moduleId: module.id
+  styleUrls: ['account-editor.component.css']
 })
 export class AccountEditorComponent implements OnInit {
 
-  user: { id: number, name: string, phones: { type: string, number: string }[] };
-  departments: { id: number, name: string }[];
-  _temp: { phone: { type: string, number: string } };
-  testUser = {
-    id: 1,
-    name: 'something',
-    phones: [
-      { type: 'mobile', number: '555-555-5555' },
-      { type: 'home', number: '555-555-5556' },
-    ]
-  }
+  departments: { id: number, name: string }[] = [
+    { id: 1, name: 'Marketing' },
+    { id: 2, name: 'Accounting' },
+    { id: 3, name: 'Terrorism' },
+  ];
+  _temp: { phone: Phone } = { phone: new Phone() };
+  testUser: User = new User();
+  user: User = this.testUser;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-    this.user = this.testUser;
-
-    this.departments = [
-      { id: 1, name: 'Marketing' },
-      { id: 2, name: 'Accounting' },
-      { id: 3, name: 'Terrorism' },
-    ];
-
-    this.clearTempPhone();
-  }
-
-  clearTempPhone() {
-    this._temp = { phone: { type: '', number: '' } };
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private userRepository: UserRepository) {
   }
 
   addPhone() {
     this.user.phones.push(this._temp.phone);
-    this.clearTempPhone();
+    this._temp.phone = new Phone();
   }
 
   save() {
@@ -52,10 +41,15 @@ export class AccountEditorComponent implements OnInit {
 
   loadRoute(params: any) {
     if (params.id) {
-      // TODO: Load from repo.
-      this.user = this.testUser;
+      this.userRepository
+        .getById(+params.id)
+        .subscribe(user => this.loadUser(user));
     } else {
-      this.user = { id: null, name: null, phones: [] };
+      this.user = new User();
     }
+  }
+
+  loadUser(user: User) {
+    this.user = user;
   }
 }
