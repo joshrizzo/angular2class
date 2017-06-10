@@ -9,6 +9,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th class="text-center">Employee</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +22,11 @@
                 <td>{{ account.email }}</td>
                 <td class="text-center">
                     {{ account.isEmployee ? 'Y' : 'N' }}
+                </td>
+                <td>
+                    <button class="btn btn-danger btn-block btn-lg" (click)="delete(account.id)">
+                        X
+                    </button>
                 </td>
             </tr>
         </tbody>

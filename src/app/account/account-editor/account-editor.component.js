@@ -9,9 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var user_repository_service_1 = require("./../../domain/api/user-repository.service");
-var domain_1 = require("./../../domain/model/domain");
+var user_1 = require("./../../domain/model/user");
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+require("rxjs/add/operator/first");
 var AccountEditorComponent = (function () {
     function AccountEditorComponent(route, router, userRepository) {
         this.route = route;
@@ -22,16 +23,31 @@ var AccountEditorComponent = (function () {
             { id: 2, name: 'Accounting' },
             { id: 3, name: 'Terrorism' },
         ];
-        this._temp = { phone: new domain_1.Phone() };
-        this.testUser = new domain_1.User();
+        this._temp = { phone: new user_1.Phone() };
+        this.testUser = new user_1.User();
         this.user = this.testUser;
     }
     AccountEditorComponent.prototype.addPhone = function () {
         this.user.phones.push(this._temp.phone);
-        this._temp.phone = new domain_1.Phone();
+        this._temp.phone = new user_1.Phone();
     };
     AccountEditorComponent.prototype.save = function () {
-        // TODO: Save.
+        var _this = this;
+        this.userRepository
+            .save(this.user)
+            .subscribe(function (result) { return _this.handleResult(result); });
+    };
+    AccountEditorComponent.prototype.delete = function () {
+        var _this = this;
+        this.userRepository
+            .delete(this.user.id)
+            .subscribe(function (result) { return _this.handleResult(result); });
+    };
+    AccountEditorComponent.prototype.cancel = function () {
+        this.router.navigateByUrl('accounts');
+    };
+    AccountEditorComponent.prototype.handleResult = function (result) {
+        console.log('Result: ' + result);
         this.router.navigateByUrl('accounts');
     };
     AccountEditorComponent.prototype.ngOnInit = function () {
@@ -46,7 +62,7 @@ var AccountEditorComponent = (function () {
                 .subscribe(function (user) { return _this.loadUser(user); });
         }
         else {
-            this.user = new domain_1.User();
+            this.user = new user_1.User();
         }
     };
     AccountEditorComponent.prototype.loadUser = function (user) {

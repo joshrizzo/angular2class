@@ -8,20 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var router_1 = require("@angular/router");
 var user_repository_service_1 = require("./../../domain/api/user-repository.service");
 var core_1 = require("@angular/core");
 var AccountListComponent = (function () {
-    function AccountListComponent(UserRepository) {
-        this.UserRepository = UserRepository;
+    function AccountListComponent(userRepository, router) {
+        this.userRepository = userRepository;
+        this.router = router;
     }
     AccountListComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.UserRepository
-            .search()
-            .subscribe(function (x) { return _this.loadUsers(x); });
+        this.loadUsers();
     };
-    AccountListComponent.prototype.loadUsers = function (users) {
-        this.accounts = users;
+    AccountListComponent.prototype.loadUsers = function () {
+        var _this = this;
+        this.userRepository
+            .search()
+            .subscribe(function (users) { return _this.accounts = users; });
+    };
+    AccountListComponent.prototype.delete = function (id) {
+        var _this = this;
+        this.userRepository
+            .delete(id)
+            .subscribe(function (result) { return _this.handleResult(result); });
+    };
+    AccountListComponent.prototype.handleResult = function (result) {
+        console.log('Result: ' + result);
+        this.loadUsers();
     };
     return AccountListComponent;
 }());
@@ -31,7 +43,8 @@ AccountListComponent = __decorate([
         templateUrl: 'account-list.component.html',
         styleUrls: ['account-list.component.css']
     }),
-    __metadata("design:paramtypes", [user_repository_service_1.UserRepository])
+    __metadata("design:paramtypes", [user_repository_service_1.UserRepository,
+        router_1.Router])
 ], AccountListComponent);
 exports.AccountListComponent = AccountListComponent;
 //# sourceMappingURL=account-list.component.js.map

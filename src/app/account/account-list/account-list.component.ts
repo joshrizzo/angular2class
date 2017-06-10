@@ -1,5 +1,6 @@
+import { Router } from '@angular/router';
 import { UserRepository } from './../../domain/api/user-repository.service';
-import { User } from './../../domain/model/domain';
+import { User } from './../../domain/model/user';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,15 +11,28 @@ import { Component, OnInit } from '@angular/core';
 export class AccountListComponent implements OnInit {
   accounts: User[];
 
-  constructor(private UserRepository: UserRepository) { }
+  constructor(
+    private userRepository: UserRepository,
+    private router: Router) { }
 
   ngOnInit() {
-    this.UserRepository
-      .search()
-      .subscribe(x => this.loadUsers(x));
+    this.loadUsers();
   }
 
-  loadUsers(users: User[]) {
-    this.accounts = users;
+  loadUsers() {
+    this.userRepository
+      .search()
+      .subscribe(users => this.accounts = users);
+  }
+
+  delete(id: number) {
+    this.userRepository
+      .delete(id)
+      .subscribe(result => this.handleResult(result));
+  }
+
+  handleResult(result: any) {
+    console.log('Result: ' + result);
+    this.loadUsers();
   }
 }

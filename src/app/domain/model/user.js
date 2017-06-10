@@ -11,4 +11,4 @@ var Phone = (function () {
     return Phone;
 }());
 exports.Phone = Phone;
-//# sourceMappingURL=domain.js.map
+//# sourceMappingURL=user.js.map

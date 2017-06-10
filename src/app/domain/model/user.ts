@@ -3,8 +3,8 @@ export class User {
     name: string;
     email: string;
     phones: Phone[];
-    department?: string;
-    isEmployee?: boolean;
+    department: string;
+    isEmployee: boolean;
 }
 
 export class Phone {

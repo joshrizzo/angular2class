@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var observable_1 = require("rxjs/observable");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 var UserRepository = (function () {
@@ -31,11 +32,34 @@ var UserRepository = (function () {
             .map(function (response) { return _this.extractData(response); })
             .catch(function (error) { return _this.handleError(error); });
     };
+    UserRepository.prototype.save = function (user) {
+        var _this = this;
+        if (user.id) {
+            console.log('Saving User ID: ' + user.id);
+            return this.http
+                .put(this.url + "/" + user.id, user)
+                .map(function (response) { return _this.extractData(response); })
+                .catch(function (error) { return _this.handleError(error); });
+        }
+        console.log('Creating new user.');
+        return this.http
+            .post(this.url, user)
+            .map(function (response) { return _this.extractData(response); })
+            .catch(function (error) { return _this.handleError(error); });
+    };
+    UserRepository.prototype.delete = function (id) {
+        var _this = this;
+        console.log('Deleting User ID: ' + id);
+        return this.http
+            .delete(this.url + "/" + id)
+            .catch(function (error) { return _this.handleError(error); });
+    };
     UserRepository.prototype.extractData = function (response) {
-        return response.json().data;
+        var jsonData = response.json();
+        return jsonData ? jsonData.data : undefined;
     };
     UserRepository.prototype.handleError = function (error) {
-        return error.message;
+        return observable_1.Observable.throw(error.message);
     };
     return UserRepository;
 }());

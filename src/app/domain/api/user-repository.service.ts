@@ -1,4 +1,4 @@
-import { User } from './../model/domain';
+import { User } from './../model/user';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/observable';
@@ -26,11 +26,34 @@ export class UserRepository {
             .catch(error => this.handleError(error));
     }
 
+    save(user: User): Observable<User> {
+        if (user.id) {
+            console.log('Saving User ID: ' + user.id);
+            return this.http
+                .put(`${this.url}/${user.id}`, user)
+                .map(response => this.extractData(response))
+                .catch(error => this.handleError(error));
+        }
+        console.log('Creating new user.');
+        return this.http
+            .post(this.url, user)
+            .map(response => this.extractData(response))
+            .catch(error => this.handleError(error));
+    }
+
+    delete(id: number): Observable<any> {
+        console.log('Deleting User ID: ' + id);
+        return this.http
+            .delete(`${this.url}/${id}`)
+            .catch(error => this.handleError(error));
+    }
+
     private extractData(response: Response) {
-        return response.json().data;
+        let jsonData = response.json();
+        return jsonData ? jsonData.data : undefined;
     }
 
     private handleError(error: any) {
-        return error.message;
+        return Observable.throw(error.message);
     }
 }

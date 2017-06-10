@@ -1,7 +1,8 @@
 import { UserRepository } from './../../domain/api/user-repository.service';
-import { User, Phone } from './../../domain/model/domain';
+import { User, Phone } from './../../domain/model/user';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import 'rxjs/add/operator/first';
 
 @Component({
   moduleId: module.id,
@@ -31,7 +32,23 @@ export class AccountEditorComponent implements OnInit {
   }
 
   save() {
-    // TODO: Save.
+    this.userRepository
+      .save(this.user)
+      .subscribe(result => this.handleResult(result));
+  }
+
+  delete() {
+    this.userRepository
+      .delete(this.user.id)
+      .subscribe(result => this.handleResult(result));
+  }
+
+  cancel() {
+    this.router.navigateByUrl('accounts')
+  }
+
+  handleResult(result: any) {
+    console.log('Result: ' + result);
     this.router.navigateByUrl('accounts');
   }
 
