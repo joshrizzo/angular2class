@@ -1,12 +1,19 @@
+import { NameValidator } from './validators/name-validator.directive';
 import { PhonePipe } from './pipes/phone.pipe';
 import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [
-    PhonePipe
+    PhonePipe,
+    NameValidator
   ],
   exports: [
-    PhonePipe
+    PhonePipe,
+    NameValidator
+  ],
+  providers: [
+    PhonePipe,
+    NameValidator
   ]
 })
 export class SharedModule { }

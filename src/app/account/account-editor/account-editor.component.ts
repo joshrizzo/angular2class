@@ -42,7 +42,7 @@ export class AccountEditorComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigateByUrl('accounts')
+    this.router.navigateByUrl('accounts');
   }
 
   handleResult(result: any) {
